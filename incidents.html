@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incidents</title>
+</head>
+<body>
+    <h1>Incident List</h1>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+    
+    {% if incidents %}
+        <ul>
+            {% for incident in incidents %}
+                <li>
+                    <strong>{{ incident.name }}</strong><br>
+                    Description: {{ incident.description }}<br>
+                    Status: {{ incident.status }}<br>
+                    {% if session['role'] == 'admin' %}
+                        <a href="{{ url_for('resolve_incident', id=incident.id) }}">Resolve Incident</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No incidents found.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Incident Management System</h1>
+    {% if role %}
+        <p>You are logged in as: <strong>{{ role }}</strong></p>
+        <p>
+            <a href="{{ url_for('incidents') }}">View Incidents</a> | 
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </p>
+        {% if role == 'admin' %}
+            <p>
+                <a href="{{ url_for('create_incident') }}">Create Incident</a>
+            </p>
+        {% endif %}
+    {% else %}
+        <p>You are not logged in. Please log in below:</p>
+        <a href="{{ url_for('login') }}">Login</a>
+    {% endif %}
+</body>
+</html>
